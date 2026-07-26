@@ -7,8 +7,8 @@ const BAZA = {
     "Rozgrzej piekarnik do 180&nbsp;°C, góra/dół. Blacha na środkowym poziomie, wyłożona papierem.",
     "Oddziel białka od żółtek.",
     "Białka ubij na sztywną pianę.",
-    "Do piany dodaj żółtka — jak przy biszkopcie — i połącz krótko, kilkoma ruchami.",
-    "Wlej roztopione, lekko przestudzone masło i ocet. Wymieszaj.",
+    "Do piany dodaj żółtka i ubijaj dalej — jak przy biszkopcie — aż masa zblednie i zrobi się jasna, prawie biała.",
+    "Wlej roztopione, lekko przestudzone masło i ocet. Połącz delikatnie, szpatułką.",
     "Suche składniki wmieszaj delikatnie, partiami, szpatułką od dołu do góry.",
     "Wyłóż na papier i uformuj prostokąt grubości około 1&nbsp;cm.",
     "Wyrównaj powierzchnię."

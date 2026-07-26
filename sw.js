@@ -1,5 +1,5 @@
 /* Kanapniki — offline. Po zmianie przepisów podbij numer wersji. */
-const CACHE = "kanapniki-v2";
+const CACHE = "kanapniki-v3";
 const PLIKI = ["./","./index.html","./przepisy.js","./manifest.webmanifest",
                "./icon-192.png","./icon-512.png","./icon-maskable.png"];
 

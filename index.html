@@ -46,6 +46,8 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.08;font-weight:800}
   opacity:.19;letter-spacing:-.05em;line-height:1}
 .karta.wide{grid-column:1/-1;min-height:0;padding:17px 18px;flex-direction:row;
   align-items:center;gap:12px;justify-content:flex-start}
+.karta.jasna{background:#F4EEE4;color:var(--ink);border:1.5px solid #E7DECF}
+.karta.jasna .ar{color:#D9542B;opacity:1;font-weight:800}
 .karta.wide .nm{font-size:18px}
 .karta.wide .ar{margin-left:auto;font-size:22px;opacity:.7}
 .tagwip{position:absolute;top:11px;left:14px;font-size:9.5px;font-weight:800;
@@ -58,13 +60,12 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.08;font-weight:800}
   transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.7,.3,1);
   -webkit-overflow-scrolling:touch}
 #view.on{transform:none}
-.top{padding:calc(env(safe-area-inset-top) + 14px) var(--pad) 30px;color:#fff;position:relative}
-.wstecz{position:absolute;top:calc(env(safe-area-inset-top) + 12px);left:12px;
-  width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.22);
+.top{padding:calc(env(safe-area-inset-top) + 12px) var(--pad) 30px;color:#fff}
+.pasek{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.wstecz{flex:none;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.22);
   display:grid;place-items:center;font-size:21px;line-height:1}
-.top h2{font-size:38px;margin-top:44px;letter-spacing:-.035em}
-.top .kicker{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
-  opacity:.8;margin-top:44px;position:absolute;left:var(--pad);top:calc(env(safe-area-inset-top) + 14px)}
+.top .kicker{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;opacity:.82}
+.top h2{font-size:38px;letter-spacing:-.035em}
 .top p{margin-top:11px;font-size:16px;opacity:.94;line-height:1.45;max-width:34ch}
 .body{padding:0 var(--pad) 120px;max-width:560px;margin:0 auto}
 .blok{margin-top:26px}
@@ -129,10 +130,10 @@ function home(){
       <p>Keto pieczywo z mąki laskowej. Własne przepisy i eksperymenty.</p>
     </div>
     <div class="karty">
-      <button class="karta wide" style="background:#17130F" onclick="otworz('_jak')">
+      <button class="karta wide jasna" onclick="otworz('_jak')">
         <span class="nm">Jak piec wszystkie Kanapniki</span><span class="ar">→</span>
       </button>
-      <button class="karta wide" style="background:#5A544C" onclick="otworz('_zanim')">
+      <button class="karta wide jasna" onclick="otworz('_zanim')">
         <span class="nm">Zanim zaczniesz</span><span class="ar">→</span>
       </button>
     </div>
@@ -149,7 +150,7 @@ function home(){
 
 /* ---------- STRONY STAŁE ---------- */
 const STALE = {
-  _jak:{ nazwa:"Jak piec", kolor:"#17130F", kicker:"Instrukcja podstawowa",
+  _jak:{ nazwa:"Jak piec", kolor:"#6B4E36", kicker:"Instrukcja podstawowa",
     opis:"Wszystkie wersje robi się tak samo. W przepisach zapisane są tylko różnice.",
     html:()=>`
       <div class="blok"><h3>Przygotowanie</h3>
@@ -170,7 +171,7 @@ const STALE = {
           <li>W temperaturze pokojowej — 2 dni</li>
           <li>W lodówce — do 5 dni</li>
         </ul></div>` },
-  _zanim:{ nazwa:"Zanim zaczniesz", kolor:"#5A544C", kicker:"Podstawy",
+  _zanim:{ nazwa:"Zanim zaczniesz", kolor:"#5F5A4E", kicker:"Podstawy",
     opis:"Pięć rzeczy, które warto wiedzieć raz.",
     html:()=>`
       <div class="blok"><h3>Czego potrzebujesz</h3>
@@ -216,8 +217,10 @@ function otworz(id){
   }
   $("#view").innerHTML = `
     <div class="top" style="background:${kolor}">
-      <button class="wstecz" onclick="zamknij()" aria-label="Wstecz">←</button>
-      <div class="kicker">${s?s.kicker:(p.grupa==="sprawdzone"?"Przepis":"Eksperyment")}</div>
+      <div class="pasek">
+        <button class="wstecz" onclick="zamknij()" aria-label="Wstecz">←</button>
+        <div class="kicker">${s?s.kicker:(p.grupa==="sprawdzone"?"Przepis":"Eksperyment")}</div>
+      </div>
       <h2>${p.nazwa}</h2>
       <p>${p.opis}</p>
     </div>

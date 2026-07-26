@@ -41,8 +41,17 @@ Wszystko siedzi w jednym pliku: **`przepisy.js`**. To zwykłe listy tekstu — p
 - `wOpracowaniu:true` — dokleja plakietkę „w opracowaniu"
 - `roznice:[]` — zostaw puste, jeśli robisz dokładnie jak w instrukcji podstawowej
 
-Po każdej zmianie w `przepisy.js` **podbij numer wersji w `sw.js`** (`kanapniki-v1` → `kanapniki-v2`).
-Bez tego telefon będzie uparcie pokazywał starą wersję z pamięci offline.
+Po zmianie w `przepisy.js` nic więcej nie musisz robić — aplikacja pobiera treść z sieci
+przy każdym otwarciu, a z pamięci offline korzysta tylko wtedy, gdy nie ma internetu.
+
+**Nie widzisz zmian po wgraniu plików?** Po kolei:
+
+1. Odczekaj minutę — GitHub Pages przebudowuje stronę po każdym commicie.
+2. Odśwież stronę dwa razy. Pierwsze odświeżenie pobiera nową wersję, drugie ją pokazuje.
+3. Jeśli aplikacja jest już na ekranie głównym telefonu — zamknij ją całkowicie
+   (nie zminimalizuj, tylko zamknij z listy aplikacji) i otwórz ponownie.
+4. Ostateczność: wejdź na stronę w zwykłej przeglądarce i zrób twarde odświeżenie —
+   `Ctrl+Shift+R` na komputerze, a na telefonie wyczyść dane strony w ustawieniach przeglądarki.
 
 ## Pliki
 

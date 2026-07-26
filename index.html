@@ -54,6 +54,12 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.08;font-weight:800}
   letter-spacing:.13em;text-transform:uppercase;background:rgba(255,255,255,.28);
   padding:3px 7px;border-radius:99px}
 .stopka{margin-top:34px;color:var(--mute);font-size:13.5px;line-height:1.55}
+.wersja{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  color:var(--mute);font-size:12.5px}
+.wersja button{margin-left:auto;border:1.5px solid var(--line);border-radius:99px;
+  padding:8px 14px;font-size:12.5px;font-weight:700;color:var(--mute)}
+.wersja button:active{background:var(--line)}
 
 /* ---------- WIDOK PRZEPISU ---------- */
 #view{position:fixed;inset:0;background:#fff;overflow-y:auto;z-index:20;
@@ -111,6 +117,7 @@ ol.kr li::before{content:counter(k);position:absolute;left:0;top:9px;width:25px;
 
 <script src="przepisy.js"></script>
 <script>
+const WERSJA = "5";
 const $ = s => document.querySelector(s);
 
 /* ---------- EKRAN GŁÓWNY ---------- */
@@ -145,7 +152,11 @@ function home(){
       <h2>Eksperymenty</h2>
       <div class="karty">${eksper.map(karta).join("")}</div>
     </div>
-    <p class="stopka">Eksperymenty nie zostały jeszcze upieczone. To kierunki, nie gotowe przepisy.</p>`;
+    <p class="stopka">Eksperymenty nie zostały jeszcze upieczone. To kierunki, nie gotowe przepisy.</p>
+    <div class="wersja">
+      <span>Kanapniki · wersja ${WERSJA}</span>
+      <button onclick="wyczysc()">Wyczyść pamięć i przeładuj</button>
+    </div>`;
 }
 
 /* ---------- STRONY STAŁE ---------- */
@@ -277,9 +288,28 @@ function startTimer(sek,co,kolor){
 }
 function stopTimer(){ if(tInt){clearInterval(tInt);tInt=null;} }
 
+async function wyczysc(){
+  try{
+    if("caches" in window){ const k=await caches.keys(); await Promise.all(k.map(x=>caches.delete(x))); }
+    if("serviceWorker" in navigator){
+      const r=await navigator.serviceWorker.getRegistrations();
+      await Promise.all(r.map(x=>x.unregister()));
+    }
+  }catch(e){}
+  location.reload(true);
+}
+
 home();
 if(location.hash){ const id=location.hash.slice(1); if(STALE[id]||PRZEPISY.some(p=>p.id===id)) otworz(id); }
-if("serviceWorker" in navigator) addEventListener("load",()=>navigator.serviceWorker.register("sw.js"));
+if("serviceWorker" in navigator){
+  addEventListener("load",()=>{
+    navigator.serviceWorker.register("sw.js").then(r=>r.update());
+    let odswiezono=false;
+    navigator.serviceWorker.addEventListener("controllerchange",()=>{
+      if(odswiezono) return; odswiezono=true; location.reload();
+    });
+  });
+}
 </script>
 </body>
 </html>
